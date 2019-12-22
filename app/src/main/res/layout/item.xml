@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="Item"
+            type="com.ruler.csw.bean.Item"/>
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:cardBackgroundColor="@{Item.isChecked ? @color/colorCardViewOrange : @color/colorCardViewBlue}"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
+        app:cardMaxElevation="8dp"
+        app:cardUseCompatPadding="true"
+        app:contentPadding="10dp"
+        android:id="@+id/cardView"
+        android:focusable="true"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/textView_length"
+                android:textSize="30sp"
+                android:textColor="@color/colorWhite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{Item.length, default=6.6}"/>
+
+            <TextView
+                android:layout_below="@id/textView_length"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/textView_date"
+                android:textSize="15sp"
+                android:textColor="@color/colorWhite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{Item.showDate, default=2018}"/>
+
+            <TextView
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/textView_date"
+                android:textSize="20sp"
+                android:textColor="@color/colorWhite"
+                android:id="@+id/textView_describe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{Item.description.equals(&quot;&quot;) ? @string/no_description : Item.description, default=description}"/>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

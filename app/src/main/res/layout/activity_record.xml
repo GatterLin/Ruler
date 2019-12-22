@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBg">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorBg">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:background="@color/colorBg"
+                android:scrollbars="vertical"
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="6">
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <RelativeLayout
+                android:visibility="gone"
+                android:background="@android:color/white"
+                android:id="@+id/layout_choose"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+                <TextView
+                    android:textSize="20sp"
+                    android:gravity="center_vertical"
+                    android:text="0"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/textView_chooseCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textColor="@android:color/black"/>
+                <Button
+                    android:textSize="16sp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:id="@+id/btn_delete"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:text="@string/delete"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:textColor="@android:color/black"/>
+                <Button
+                    android:textSize="16sp"
+                    android:layout_toLeftOf="@id/btn_delete"
+                    android:layout_toStartOf="@id/btn_delete"
+                    android:id="@+id/btn_chooseAll"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:text="@string/select_all"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:textColor="@android:color/black"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:visibility="visible"
+            android:id="@+id/textView_null"
+            android:textSize="30sp"
+            android:gravity="center"
+            android:text="@string/no_record"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </FrameLayout>
+</layout>

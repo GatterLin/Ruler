@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">Ruler</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="hello_world">Hello world!</string>
+
+    <string name="toast_save_success">Saved</string>
+
+    <string name="select_all">Select All</string>
+
+    <string name="deselect_all">Deselect All</string>
+
+    <string name="no_description">No Description</string>
+
+    <string name="input_the_description">Input the Description</string>
+
+    <string name="ok">@android:string/ok</string>
+
+    <string name="cancel">@android:string/cancel</string>
+
+    <string name="delete">Delete</string>
+
+    <string name="no_record">No Record</string>
+
+    <string name="calibration">Calibration</string>
+
+    <string name="save_calibration">Save the calibration?</string>
+
+    <string name="reset_calibration">Reset the calibration?</string>
+
+    <string name="calibration_cm">Measure 3 cm</string>
+
+    <string name="calibration_credit_card">Short side of credit card</string>
+
+    <string name="calibration_inch">Measure 1 inch</string>
+
+    <string name="shortcuts_label1">Record</string>
+
+    <string name="shortcuts_label2">Record</string>
+
+    <string name="shortcuts_disMess">No Record</string>
+
+    <!-- -
+        This is an ad unit ID for a banner test ad. Replace with your own banner ad unit id.
+        For more information, see https://support.google.com/admob/answer/3052638
+    <!- -->
+    <string name="app_ad_unit_id">ca-app-pub-5766415870451342~9467503863</string>
+    <!--默认广告-->
+    <string name="banner_ad_unit_id">ca-app-pub-5766415870451342/9786576097</string>
+    <string name="inset_ad_unit_id">ca-app-pub-5766415870451342/1141799311</string>
+
+</resources>

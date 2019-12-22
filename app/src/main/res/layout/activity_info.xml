@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="InfoActivity"
+            type="com.ruler.csw.activity.InfoActivity"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <com.google.android.material.appbar.AppBarLayout
+                    android:id="@+id/abl_homePage"
+                    android:layout_width="match_parent"
+                    android:layout_height="58dp"
+                    android:orientation="vertical"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                    android:gravity="center_vertical">
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/tb_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="58dp"
+                        android:background="@color/colorPrimary"
+                        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                        app:title="">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <ImageView
+                                android:id="@+id/iv_back"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:padding="4dp"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginLeft="8dp"
+                                android:src="@drawable/navigation_back_icon"
+                                android:background="?android:attr/selectableItemBackgroundBorderless"
+                                tools:targetApi="lollipop"
+                                android:onClick="@{InfoActivity::onClick}"/>
+
+                            <TextView
+                                android:id="@+id/tv_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginLeft="16dp"
+                                android:text="关于/打赏"
+                                android:textStyle="bold"
+                                android:textSize="18sp"
+                                android:textColor="@android:color/white"/>
+
+                        </LinearLayout>
+
+                    </androidx.appcompat.widget.Toolbar>
+                </com.google.android.material.appbar.AppBarLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.618"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv1"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="3dp"
+                android:onClick="@{InfoActivity::onClick}">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_alipay">
+
+                    <ImageView
+                        android:id="@+id/iv_alipay_icon"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:padding="4dp"
+                        android:src="@drawable/alipay_icon"
+                        android:scaleType="centerInside"
+                        android:adjustViewBounds="true"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginTop="4dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="56dp"
+                        android:layout_alignTop="@id/iv_alipay_icon"
+                        android:layout_toEndOf="@id/iv_alipay_icon"
+                        android:layout_toRightOf="@id/iv_alipay_icon"
+                        android:gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:textSize="20sp"
+                        android:textColor="@android:color/white"
+                        android:text="支付宝打赏" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/iv_alipay_icon"
+                        android:gravity="center_vertical"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginRight="16dp"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/white"
+                        android:text="拉起支付宝转账页面，进行打赏" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv2"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="3dp"
+                android:onClick="@{InfoActivity::onClick}">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_alipay_hongbao">
+
+                    <ImageView
+                        android:id="@+id/iv_aliPayHongbao"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:padding="8dp"
+                        android:src="@drawable/alipay_hongbao_icon"
+                        android:scaleType="centerInside"
+                        android:adjustViewBounds="true"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginTop="4dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="56dp"
+                        android:layout_alignTop="@id/iv_aliPayHongbao"
+                        android:layout_toEndOf="@id/iv_aliPayHongbao"
+                        android:layout_toRightOf="@id/iv_aliPayHongbao"
+                        android:gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:textSize="20sp"
+                        android:textColor="@android:color/white"
+                        android:text="领支付宝红包打赏" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/iv_aliPayHongbao"
+                        android:gravity="center_vertical"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginRight="16dp"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/white"
+                        android:text="拉起支付宝搜索&quot;526608712&quot;领红包，通过此方式对开发者打赏" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv3"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                android:onClick="@{InfoActivity::onClick}">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_wx">
+
+                    <ImageView
+                        android:id="@+id/iv_wxIcon"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:src="@drawable/wx_icon"
+                        android:scaleType="centerInside"
+                        android:adjustViewBounds="true"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="0dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="56dp"
+                        android:gravity="center_vertical"
+                        android:layout_alignTop="@id/iv_wxIcon"
+                        android:layout_toEndOf="@id/iv_wxIcon"
+                        android:layout_toRightOf="@id/iv_wxIcon"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:textSize="20sp"
+                        android:textColor="@android:color/white"
+                        android:text="微信打赏" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/iv_wxIcon"
+                        android:gravity="center_vertical"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginRight="16dp"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/white"
+                        android:text="拉起微信扫一扫界面，然后打开&quot;从相册选取二维码&quot;选择开发者个人收款码，进行打赏" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#2196F3</color>
+    <color name="colorPrimaryDark">#1976D2</color>
+    <color name="colorAccent">#03A9F4</color>
+
+    <color name="colorBg">#EDEDED</color>
+    <color name="colorCardViewBlue">#1e90FF</color>
+    <color name="colorCardViewOrange">#ffff8800</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorTrans">#00000000</color>
+
+    <color name="colorWx">#09BA07</color>
+    <color name="colorWx1">#00AA00</color>
+    <color name="colorWx2">#0ACA0F</color>
+
+    <color name="colorAlipay">#ff33b5e5</color>
+    <color name="colorAlipay1">#ff23a5d5</color>
+    <color name="colorAlipay2">#ff43c5f5</color>
+
+    <color name="colorAlipayHongbao">#ffff4444</color>
+    <color name="colorAlipayHongbao1">#ffdf2424</color>
+    <color name="colorAlipayHongbao2">#ffff5454</color>
+</resources>

@@ -1,0 +1,22 @@
+<shortcuts xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <shortcut
+        android:shortcutId="record"
+        android:enabled="true"
+        android:icon="@drawable/record_shortcut"
+        android:shortcutShortLabel="@string/shortcuts_label1"
+        android:shortcutLongLabel="@string/shortcuts_label2"
+        android:shortcutDisabledMessage="@string/shortcuts_disMess"
+        tools:targetApi="n_mr1">
+
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.ruler.csw"
+            android:targetClass="com.ruler.csw.activity.RecordActivity" />
+
+        <categories android:name="android.shortcut.conversation"/>
+
+    </shortcut>
+
+</shortcuts>

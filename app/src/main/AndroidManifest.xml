@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.ruler.csw">
+
+     <!--Include required permissions for Google Mobile Ads to run. -->
+    <!--<uses-permission android:name="android.permission.INTERNET" />-->
+    <!-- 微信需要往sd卡写入二维码 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <application
+        android:name=".application.App"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppThemeFullScreen">
+        <activity
+            android:name=".activity.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape"
+            android:resizeableActivity="false"
+            tools:targetApi="n">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts"/>
+        </activity> <!-- Include the AdActivity configChanges and theme. -->
+
+        <activity
+            android:name=".activity.RecordActivity"
+            android:theme="@style/AppThemeFullScreen"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:resizeableActivity="false"
+            tools:targetApi="n" />
+
+        <activity
+            android:name=".activity.CalibrationActivity"
+            android:theme="@style/AppThemeFullScreen"
+            android:screenOrientation="landscape"
+            android:resizeableActivity="false"
+            tools:targetApi="n" />
+
+        <!--<activity-->
+            <!--android:name="com.miui.zeus.mimo.sdk.activityProxy.ProxyActivity"-->
+            <!--android:configChanges="keyboard|keyboardHidden|orientation|screenSize"-->
+            <!--android:exported="false"-->
+            <!--android:screenOrientation="behind"-->
+            <!--android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>-->
+
+        <activity android:name=".activity.InfoActivity"
+            android:theme="@style/AppThemeFullScreen"
+            android:screenOrientation="landscape"
+            android:resizeableActivity="false"/>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <!--<activity-->
+            <!--android:name="com.google.android.gms.ads.AdActivity"-->
+            <!--android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"-->
+            <!--android:theme="@android:style/Theme.Translucent" />-->
+    </application>
+
+</manifest>
