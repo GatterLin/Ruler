@@ -1,5 +1,6 @@
 package com.ruler.csw.surfaceview;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -180,10 +181,7 @@ public class SettingView implements SizeInfoHandler {
                     &&
                     isSettingOpen) {
                 CursorView.cursorLock = true;
-                Intent intent = new Intent(context, RecordActivity.class);
-                Bundle bundle = new Bundle();
-                intent.putExtra("bundle", bundle);
-                ((MainActivity) context).startActivityForResult(intent, App.Request_Code_Start_Activity);
+                RecordActivity.intentFor((Activity) context);
                 // 按下动画
                 times = 0;
                 bmpTempY = recordY;
@@ -283,7 +281,7 @@ public class SettingView implements SizeInfoHandler {
                     &&
                     isSettingOpen) {
                 CursorView.cursorLock = true;
-                context.startActivity(new Intent(context, InfoActivity.class));
+                InfoActivity.intentFor((Activity) context);
 
                 // 按下动画
                 times = 0;

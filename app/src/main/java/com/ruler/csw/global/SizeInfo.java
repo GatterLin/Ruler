@@ -1,9 +1,5 @@
 package com.ruler.csw.global;
 
-import android.content.Context;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
-
 /**
  * Created by 丛 on 2019/12/23 0023.
  */

@@ -1,5 +1,6 @@
 package com.ruler.csw.activity;
 
+import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -44,6 +45,10 @@ public class InfoActivity extends BaseActivity {
         binding.setInfoActivity(this);
         binding.tbInfo.setContentInsetsAbsolute(0, 0); // 去掉toolbar内部边距
         initRv();
+    }
+
+    public static void intentFor(Activity activity) {
+        activity.startActivity(new Intent(activity, InfoActivity.class));
     }
 
     private void initRv() {
