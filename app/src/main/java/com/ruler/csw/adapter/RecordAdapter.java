@@ -2,7 +2,7 @@ package com.ruler.csw.adapter;
 
 import android.content.Context;
 
-import com.ruler.csw.base.BaseRecyclerViewAdapter;
+import com.ruler.csw.baseview.BaseRecyclerViewAdapter;
 import com.ruler.csw.bean.Item;
 import com.ruler.csw.databinding.ItemBinding;
 

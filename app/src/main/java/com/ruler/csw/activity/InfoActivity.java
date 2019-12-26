@@ -16,8 +16,8 @@ import android.widget.Toast;
 
 import com.ruler.csw.R;
 import com.ruler.csw.BR;
-import com.ruler.csw.base.BaseActivity;
-import com.ruler.csw.base.BaseRecyclerViewAdapter;
+import com.ruler.csw.baseview.BaseActivity;
+import com.ruler.csw.baseview.BaseRecyclerViewAdapter;
 import com.ruler.csw.bean.InfoBean;
 import com.ruler.csw.databinding.ActivityInfoBinding;
 

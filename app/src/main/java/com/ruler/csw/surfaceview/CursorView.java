@@ -6,7 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.MotionEvent;
 
-import com.ruler.csw.application.App;
+import com.ruler.csw.global.SizeInfoHandler;
 import com.ruler.csw.myinterface.DrawViewInterface;
 
 import java.util.Timer;
@@ -16,7 +16,7 @@ import java.util.TimerTask;
 /**
  * Created by 丛 on 2018/6/13 0013.
  */
-public class CursorView implements DrawViewInterface {
+public class CursorView implements DrawViewInterface, SizeInfoHandler {
     // 游标线坐标
     private float lineStartX; // 改值即为测量距离
     private float lineStartY;
@@ -57,12 +57,12 @@ public class CursorView implements DrawViewInterface {
         centerXInside = centerX;
         centerY = lineEndY;
         centerYInside = centerY;
-        radiusOutside = App.screenW / 24; // 比例 游标圆饼半径为1080p下 80px
-        radiusInside = radiusOutside - (App.screenW / 120); //比例 1080p下16px
+        radiusOutside = getScreenW() / 24; // 比例 游标圆饼半径为1080p下 80px
+        radiusInside = radiusOutside - (getScreenW() / 120); //比例 1080p下16px
         radiusInsideTemp = radiusInside;
 
         color = Color.BLUE;
-        lineWidth = App.screenW / 384f; // 游标线宽度,1080p下5px
+        lineWidth = getScreenW() / 384f; // 游标线宽度,1080p下5px
         timer = new Timer();
         isTouchCursorMove = false;
 
@@ -80,8 +80,8 @@ public class CursorView implements DrawViewInterface {
         // 画游标线
         canvas.drawLine(lineStartX, lineStartY, lineEndX, lineEndY, paint);
         // 设置游标饼阴影
-        paint.setShadowLayer(App.screenW / 192,
-                App.screenW / 384, App.screenW / 384, Color.GRAY);
+        paint.setShadowLayer(getScreenW() / 192,
+                getScreenW() / 384, getScreenW() / 384, Color.GRAY);
         // 画外游标饼
         canvas.drawCircle(centerX, centerY, radiusOutside, paint);
         // 取消阴影
@@ -119,7 +119,7 @@ public class CursorView implements DrawViewInterface {
             }, 0, 1);
             return true;
         } else if (isTouchCursorMove && event.getAction() == MotionEvent.ACTION_MOVE) {
-            if (moveX > App.screenW) { // 游标移动不能超出横向屏幕范围
+            if (moveX > getScreenW()) { // 游标移动不能超出横向屏幕范围
                 return true;
             }
             // 游标线坐标
@@ -128,12 +128,12 @@ public class CursorView implements DrawViewInterface {
             lineEndX = lineStartX;
             // 控制游标纵向屏幕范围
             if (!isCalibrationMode) {
-                if (moveY < App.screenH / 5f * 4f) {
+                if (moveY < getScreenH() / 5f * 4f) {
                     lineEndY = moveY; // 游标线长度2cm
                 }
             } else {
-                if (moveY > (int)(App.screenH / 8f) + (int)(App.screenH / 2.7f) &&
-                        moveY < App.screenH / 5f * 4f) {
+                if (moveY > (int)(getScreenH() / 8f) + (int)(getScreenH() / 2.7f) &&
+                        moveY < getScreenH() / 5f * 4f) {
                     lineEndY = moveY;
                 }
             }
@@ -174,7 +174,7 @@ public class CursorView implements DrawViewInterface {
             if (cursorLock)
                 return true;
             float moveDelta = moveX - lastMoveX;
-            if (lineStartX + moveDelta < App.screenW && lineStartX + moveDelta > 0) {
+            if (lineStartX + moveDelta < getScreenW() && lineStartX + moveDelta > 0) {
                 lineStartX += moveDelta;
             }
             lineEndX = lineStartX;
@@ -207,11 +207,11 @@ public class CursorView implements DrawViewInterface {
     }
 
     private float getFormatScale(float measureLength) {
-        float ration = App.sizeRationMM;
-        if (App.unit.equals("cm")) {
-            ration = App.sizeRationMM;
-        } else if (App.unit.equals("inch")) {
-            ration = App.sizeRationINCH;
+        float ration = getSizeRationMM();
+        if ("cm".equals(getCurUnit())) {
+            ration = getSizeRationMM();
+        } else if ("inch".equals(getCurUnit())) {
+            ration = getSizeRationINCH();
         }
         float length = measureLength / ration; // 单位数字变为毫米
         length = Math.round(length); // 毫米四舍五入
@@ -221,12 +221,12 @@ public class CursorView implements DrawViewInterface {
 
     public String getLengthString() {
         float length = getFormatScale(lineStartX);
-        if (App.unit.equals("cm")) {
-            length /= App.sizeRationMM; // 变为毫米
+        if ("cm".equals(getCurUnit())) {
+            length /= getSizeRationMM(); // 变为毫米
             length = Math.round(length); // 四舍五入
             return (length / 10f) + "cm"; // 变为厘米
-        } else if (App.unit.equals("inch")) {
-            int inch1_32Num = Math.round(length / App.size1_32inch);
+        } else if ("inch".equals(getCurUnit())) {
+            int inch1_32Num = Math.round(length / getSize1_32inch());
             int leftNum = inch1_32Num / 32;
             int rightNum = inch1_32Num % 32;
             return (leftNum == 0 ? (rightNum == 0 ? "0" : "") : leftNum) + " " +

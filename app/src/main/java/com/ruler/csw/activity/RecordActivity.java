@@ -21,7 +21,7 @@ import android.widget.EditText;
 import com.ruler.csw.R;
 import com.ruler.csw.adapter.RecordAdapter;
 import com.ruler.csw.application.App;
-import com.ruler.csw.base.BaseActivity;
+import com.ruler.csw.baseview.BaseActivity;
 import com.ruler.csw.bean.Item;
 import com.ruler.csw.databinding.ActivityRecordBinding;
 import com.ruler.csw.util.RecordUtil;

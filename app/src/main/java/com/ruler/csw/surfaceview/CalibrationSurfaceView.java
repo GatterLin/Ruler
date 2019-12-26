@@ -19,9 +19,10 @@ import android.widget.Toast;
 
 import com.ruler.csw.R;
 import com.ruler.csw.activity.CalibrationActivity;
-import com.ruler.csw.application.App;
-import com.ruler.csw.base.BaseActivity;
-import com.ruler.csw.base.BaseSurfaceView;
+import com.ruler.csw.baseview.BaseActivity;
+import com.ruler.csw.baseview.BaseSurfaceView;
+import com.ruler.csw.global.SizeInfo;
+import com.ruler.csw.global.SizeInfoHandler;
 import com.ruler.csw.util.MySP;
 
 import java.util.Timer;
@@ -30,7 +31,8 @@ import java.util.TimerTask;
 /**
  * Created by 丛 on 2018/6/16 0016.
  */
-public class CalibrationSurfaceView extends BaseSurfaceView<CalibrationActivity> implements CalibrationActivity.NPChangedListener {
+public class CalibrationSurfaceView extends BaseSurfaceView<CalibrationActivity>
+        implements CalibrationActivity.NPChangedListener, SizeInfoHandler {
     public int measureMode;
 
     private String[] calibrationName = new String[]{
@@ -65,7 +67,7 @@ public class CalibrationSurfaceView extends BaseSurfaceView<CalibrationActivity>
     private void init() {
         measureMode = 1;
 
-        cursorView = new CursorView((Activity) getContext(), App.size1mm * 54f, App.screenH / 1.5f);
+        cursorView = new CursorView((Activity) getContext(), getSize1mm() * 54f, getScreenH() / 1.5f);
         cursorView.setIsCalibrationMode(true);
 
         getActivity().setNPChangedListener(this);
@@ -77,12 +79,12 @@ public class CalibrationSurfaceView extends BaseSurfaceView<CalibrationActivity>
         bmpBack = BitmapFactory.decodeResource(getResources(), R.drawable.back);
         bmpBack = createScaleBitmap(bmpBack);
 
-        bmpOKX = App.screenW / 20f * 14f;
-        bmpOKY = App.screenH / 20f * 17f;
-        bmpRestoreX = App.screenW / 20f * 16f;
-        bmpRestoreY = App.screenH / 20f * 17f;
-        bmpBackX = App.screenW / 20f * 18f;
-        bmpBackY = App.screenH / 20f * 17f;
+        bmpOKX = getScreenW() / 20f * 14f;
+        bmpOKY = getScreenH() / 20f * 17f;
+        bmpRestoreX = getScreenW() / 20f * 16f;
+        bmpRestoreY = getScreenH() / 20f * 17f;
+        bmpBackX = getScreenW() / 20f * 18f;
+        bmpBackY = getScreenH() / 20f * 17f;
     }
 
     @Override
@@ -97,29 +99,29 @@ public class CalibrationSurfaceView extends BaseSurfaceView<CalibrationActivity>
         canvas.drawBitmap(bmpBack, bmpBackX, bmpBackY, paint);
         // 画距离
         paint.setColor(Color.BLUE);
-        paint.setStrokeWidth(App.screenW / 384); //设置除“游标线”外的宽度为5px(1080p) 比例
+        paint.setStrokeWidth(getScreenW() / 384); //设置除“游标线”外的宽度为5px(1080p) 比例
         float lineStartX = cursorView.getLineStartX();
         float lineEndY = cursorView.getLineEndY();
         //左箭头
         canvas.drawLine(0, lineEndY / 2,
-                App.screenW / 64, lineEndY / 2 - App.screenW / 96, paint); //比例 1080p下为30px和20px
+                getScreenW() / 64, lineEndY / 2 - getScreenW() / 96, paint); //比例 1080p下为30px和20px
         canvas.drawLine(0, lineEndY / 2,
-                App.screenW / 64, lineEndY / 2 + App.screenW / 96, paint); //比例 1080p下为30px和20px
+                getScreenW() / 64, lineEndY / 2 + getScreenW() / 96, paint); //比例 1080p下为30px和20px
         //虚线
         int i = 0;
         while(i < lineStartX) {
             canvas.drawLine(i, lineEndY / 2,
-                    i + App.screenW / 192, lineEndY / 2, paint); //比例 1080p下 10px
-            i += App.screenW / 96;//比例 1080p下 20px
+                    i + getScreenW() / 192, lineEndY / 2, paint); //比例 1080p下 10px
+            i += getScreenW() / 96;//比例 1080p下 20px
         }
         //右箭头
         canvas.drawLine(lineStartX, lineEndY / 2,
-                lineStartX - App.screenW / 64, lineEndY / 2 - App.screenW / 96, paint); //比例 1080p下为30px和20px
+                lineStartX - getScreenW() / 64, lineEndY / 2 - getScreenW() / 96, paint); //比例 1080p下为30px和20px
         canvas.drawLine(lineStartX, lineEndY / 2,
-                lineStartX - App.screenW / 64, lineEndY / 2 + App.screenW / 96, paint); //比例 1080p下为30px和20px
+                lineStartX - getScreenW() / 64, lineEndY / 2 + getScreenW() / 96, paint); //比例 1080p下为30px和20px
         //画3cm、短边、直径文字
-        paint.setTextSize(App.screenW / 36f); //比例 1080p下 30px
-        paint.setShadowLayer(App.screenW / 960, App.screenW / 1920, App.screenW / 1920, Color.GRAY);//比例1080p
+        paint.setTextSize(getScreenW() / 36f); //比例 1080p下 30px
+        paint.setShadowLayer(getScreenW() / 960, getScreenW() / 1920, getScreenW() / 1920, Color.GRAY);//比例1080p
 
         switch (measureMode) {
             case 0:
@@ -226,20 +228,20 @@ public class CalibrationSurfaceView extends BaseSurfaceView<CalibrationActivity>
         measureMode = newValue;
         switch (newValue) {
             case 0:
-                cursorView.setCursorPosition(App.size1mm * 30f, App.screenH / 1.5f); // 3cm
+                cursorView.setCursorPosition(getSize1mm() * 30f, getScreenH() / 1.5f); // 3cm
                 break;
             case 1:
-                cursorView.setCursorPosition(App.size1mm * 54f, App.screenH / 1.5f); // 银行卡短边
+                cursorView.setCursorPosition(getSize1mm() * 54f, getScreenH() / 1.5f); // 银行卡短边
                 break;
             case 2:
-                cursorView.setCursorPosition(App.size1mm * 25.4f, App.screenH / 1.5f); // 1英寸
+                cursorView.setCursorPosition(getSize1mm() * 25.4f, getScreenH() / 1.5f); // 1英寸
                 break;
         }
     }
 
     private Bitmap createScaleBitmap(Bitmap bitmap) {
         return Bitmap.createScaledBitmap(bitmap,
-                (int) (App.screenW / 20), (int) (App.screenW / 20), false); //设置“设置”按钮尺寸为96*96(1080p) 比例
+                (int) (getScreenW() / 20), (int) (getScreenW() / 20), false); //设置“设置”按钮尺寸为96*96(1080p) 比例
     }
 
     //提示"确认"对话框
@@ -254,26 +256,26 @@ public class CalibrationSurfaceView extends BaseSurfaceView<CalibrationActivity>
                 float measureLength = cursorView.getLineStartX();
                 switch (measureMode) {
                     case 0: // 3cm
-                        App.size1mm = measureLength / 30f;
-                        App.sizeRationMM = App.size1mm / App.size1px;
-                        App.size1_32inch = App.size1mm * 25.4f / 32f;
-                        App.sizeRationINCH = App.size1_32inch / App.size1px;
+                        setSize1mm(measureLength / 30f);
+                        setSizeRationMM(getSize1mm() / getSize1px());
+                        setSize1_32inch(getSize1mm() * 25.4f / 32f);
+                        setSizeRationINCH(getSize1_32inch() / getSize1px());
                         break;
                     case 1: // 银行卡短边
-                        App.size1mm = measureLength / 54f;
-                        App.sizeRationMM = App.size1mm / App.size1px;
-                        App.size1_32inch = measureLength / 2.125f / 32f;
-                        App.sizeRationINCH = App.size1_32inch / App.size1px;
+                        setSize1mm(measureLength / 54f);
+                        setSizeRationMM(getSize1mm() / getSize1px());
+                        setSize1_32inch(measureLength / 2.125f / 32f);
+                        setSizeRationINCH(getSize1_32inch() / getSize1px());
                         break;
                     case 2: // 1inch
-                        App.size1mm = measureLength / 25.4f;
-                        App.sizeRationMM = App.size1mm / App.size1px;
-                        App.size1_32inch = measureLength / 32f;
-                        App.sizeRationINCH = App.size1_32inch / App.size1px;
+                        setSize1mm(measureLength / 25.4f);
+                        setSizeRationMM(getSize1mm() / getSize1px());
+                        setSize1_32inch(measureLength / 32f);
+                        setSizeRationINCH(getSize1_32inch() / getSize1px());
                         break;
                 }
-                MySP.getInstance(getContext()).saveData("size_1mm", App.size1mm);
-                MySP.getInstance(getContext()).saveData("size1_32inch", App.size1_32inch);
+                MySP.getInst(getContext()).saveData("size_1mm", getSize1mm());
+                MySP.getInst(getContext()).saveData("size1_32inch", getSize1_32inch());
                 Toast.makeText(getContext(), R.string.toast_save_success, Toast.LENGTH_SHORT).show();
             }
         });
@@ -296,18 +298,18 @@ public class CalibrationSurfaceView extends BaseSurfaceView<CalibrationActivity>
             public void onClick(DialogInterface dialog, int which) {
                 DisplayMetrics dm = getContext().getResources().getDisplayMetrics();
 
-                App.size1mm = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_MM, 1f, dm);
-                MySP.getInstance(getContext()).saveData("size_1mm", App.size1mm);
-                App.sizeRationMM = App.size1mm / App.size1px;
+                setSize1mm(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_MM, 1f, dm));
+                MySP.getInst(getContext()).saveData("size_1mm", getSize1mm());
+                setSizeRationMM(getSize1mm() / getSize1px());
 
-                App.size1_32inch = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_IN, 1/32f, dm);
-                MySP.getInstance(getContext()).saveData("size1_32inch", App.size1_32inch);
-                App.sizeRationINCH = App.size1_32inch / App.size1px;
+                setSize1_32inch(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_IN, 1/32f, dm));
+                MySP.getInst(getContext()).saveData("size1_32inch", getSize1_32inch());
+                setSizeRationINCH(getSize1_32inch() / getSize1px());
 
                 //还原numberPicker模式和模式变量
                 ((CalibrationActivity) getContext()).binding.npCalibration.setValue(1);
                 measureMode = 1;
-                cursorView.setCursorPosition(App.size1mm * 54f, App.screenH / 1.5f);
+                cursorView.setCursorPosition(getSize1mm() * 54f, getScreenH() / 1.5f);
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

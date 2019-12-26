@@ -18,6 +18,8 @@ import com.ruler.csw.activity.MainActivity;
 import com.ruler.csw.activity.RecordActivity;
 import com.ruler.csw.application.App;
 import com.ruler.csw.bean.Item;
+import com.ruler.csw.global.SizeInfo;
+import com.ruler.csw.global.SizeInfoHandler;
 import com.ruler.csw.util.MySP;
 import com.ruler.csw.util.RecordUtil;
 
@@ -29,7 +31,7 @@ import java.util.TimerTask;
 /**
  * Created by 丛 on 2018/6/14 0014.
  */
-public class SettingView {
+public class SettingView implements SizeInfoHandler {
     private Bitmap bmpSetting;
     private Bitmap bmpSave;
     private Bitmap bmpRecorder;
@@ -69,15 +71,15 @@ public class SettingView {
         bmpRecorder = BitmapFactory.decodeResource(res, R.drawable.record);
         bmpRecorder = createScaleBitmap(bmpRecorder);
         bmpUnit = BitmapFactory.decodeResource(res,
-                App.unit.equals("cm") ? R.drawable.unit_cm : R.drawable.unit_inch);
+                "cm".equals(getCurUnit()) ? R.drawable.unit_cm : R.drawable.unit_inch);
         bmpUnit = createScaleBitmap(bmpUnit);
         bmpCalibration = BitmapFactory.decodeResource(res, R.drawable.calibration);
         bmpCalibration = createScaleBitmap(bmpCalibration);
         bmpInfo = BitmapFactory.decodeResource(res, R.drawable.info);
         bmpInfo = createScaleBitmap(bmpInfo);
 
-        settingX = App.screenW / 20f * 18.5f; //"设置"图标绘制位置X
-        settingY = App.screenH / 20f * 17.5f; //"设置"图标绘制位置Y,这个值和numberpicker的Y坐标相关
+        settingX = getScreenW() / 20f * 18.5f; //"设置"图标绘制位置X
+        settingY = getScreenH() / 20f * 17.5f; //"设置"图标绘制位置Y,这个值和numberpicker的Y坐标相关
         saveX = settingX;
         saveY = settingY;
         unitX = settingX;
@@ -131,7 +133,7 @@ public class SettingView {
             if (Math.abs(event.getX() - (settingX + bmpSetting.getWidth() / 2f))
                     < bmpSetting.getWidth()
                     &&
-                    Math.abs(event.getY() - (App.screenH / 20f * 17.5f + bmpSetting.getHeight() / 2f))
+                    Math.abs(event.getY() - (getScreenH() / 20f * 17.5f + bmpSetting.getHeight() / 2f))
                             < bmpSetting.getHeight()) {
                 CursorView.cursorLock = true;
                 openOrCloseSetting(isSettingOpen);
@@ -143,7 +145,7 @@ public class SettingView {
             if (Math.abs(event.getX() - (saveX + bmpSave.getWidth() / 2f + popLengthSave)) //右侧括号里的是设置中心的坐标
                     < bmpSave.getWidth()
                     &&
-                    Math.abs(event.getY() - (App.screenH / 20f * 17.5f + bmpSave.getHeight() / 2f))
+                    Math.abs(event.getY() - (getScreenH() / 20f * 17.5f + bmpSave.getHeight() / 2f))
                             < bmpSave.getHeight()
                     &&
                     isSettingOpen) {
@@ -173,7 +175,7 @@ public class SettingView {
             if (Math.abs(event.getX() - (recordX + bmpRecorder.getWidth() / 2f + popLengthRecorder)) //右侧括号里的是设置中心的坐标
                     < bmpRecorder.getWidth()
                     &&
-                    Math.abs(event.getY() - (App.screenH / 20f * 17.5f + bmpRecorder.getHeight() / 2f))
+                    Math.abs(event.getY() - (getScreenH() / 20f * 17.5f + bmpRecorder.getHeight() / 2f))
                             < bmpRecorder.getHeight()
                     &&
                     isSettingOpen) {
@@ -206,19 +208,19 @@ public class SettingView {
             if (Math.abs(event.getX() - (unitX + bmpUnit.getWidth() / 2f + popLengthTurn)) //右侧括号里的是设置中心的坐标
                     < bmpUnit.getWidth()
                     &&
-                    Math.abs(event.getY() - (App.screenH / 20f * 17.5f + bmpUnit.getHeight() / 2f))
+                    Math.abs(event.getY() - (getScreenH() / 20f * 17.5f + bmpUnit.getHeight() / 2f))
                             < bmpUnit.getHeight()
                     &&
                     isSettingOpen) {
                 CursorView.cursorLock = true;
-                if (App.unit.equals("cm")) {
-                    App.unit = "inch";
-                    MySP.getInstance(context).saveData("unit", "inch");
+                if ("cm".equals(getCurUnit())) {
+                    setCurUnit("inch");
+                    MySP.getInst(context).saveData("unit", "inch");
                     bmpUnit = BitmapFactory.decodeResource(context.getResources(), R.drawable.unit_inch);
                     bmpUnit = createScaleBitmap(bmpUnit);
-                } else if (App.unit.equals("inch")) {
-                    App.unit = "cm";
-                    MySP.getInstance(context).saveData("unit", "cm");
+                } else if ("inch".equals(getCurUnit())) {
+                    setCurUnit("cm");
+                    MySP.getInst(context).saveData("unit", "cm");
                     bmpUnit = BitmapFactory.decodeResource(context.getResources(), R.drawable.unit_cm);
                     bmpUnit = createScaleBitmap(bmpUnit);
                 }
@@ -246,7 +248,7 @@ public class SettingView {
             if (Math.abs(event.getX() - (calibrationX + bmpCalibration.getWidth() / 2f + popLengthCalibration)) //右侧括号里的是设置中心的坐标
                     < bmpCalibration.getWidth()
                     &&
-                    Math.abs(event.getY() - (App.screenH / 20f * 17.5f + bmpCalibration.getHeight() / 2f))
+                    Math.abs(event.getY() - (getScreenH() / 20f * 17.5f + bmpCalibration.getHeight() / 2f))
                             < bmpCalibration.getHeight()
                     &&
                     isSettingOpen) {
@@ -276,7 +278,7 @@ public class SettingView {
             } else if (Math.abs(event.getX() - (infoX + bmpInfo.getWidth() / 2f + popLengthInfo)) //右侧括号里的是设置中心的坐标
                     < bmpInfo.getWidth()
                     &&
-                    Math.abs(event.getY() - (App.screenH / 20f * 17.5f + bmpInfo.getHeight() / 2f))
+                    Math.abs(event.getY() - (getScreenH() / 20f * 17.5f + bmpInfo.getHeight() / 2f))
                             < bmpInfo.getHeight()
                     &&
                     isSettingOpen) {
@@ -317,7 +319,7 @@ public class SettingView {
 
     private Bitmap createScaleBitmap(Bitmap bitmap) {
         return Bitmap.createScaledBitmap(bitmap,
-                (int) (App.screenW / 20), (int) (App.screenW / 20), false); //设置“设置”按钮尺寸为96*96(1080p) 比例
+                (int) (getScreenW() / 20), (int) (getScreenW() / 20), false); //设置“设置”按钮尺寸为96*96(1080p) 比例
     }
 
     private void openOrCloseSetting(boolean isOpen) {
@@ -351,11 +353,11 @@ public class SettingView {
                 @Override
                 public void run() {
                     degree -= 1;
-                    popLengthSave += App.screenW / 1920; //1px(1080p) 比例
-                    popLengthRecorder += App.screenW / 960f; //2px(1080p) 比例
-                    popLengthTurn += App.screenW / 640f; //3px(1080p) 比例
-                    popLengthCalibration += App.screenW / 480f; //4px(1080p) 比例
-                    popLengthInfo += App.screenW / 384f; //5px(1080p) 比例
+                    popLengthSave += getScreenW() / 1920; //1px(1080p) 比例
+                    popLengthRecorder += getScreenW() / 960f; //2px(1080p) 比例
+                    popLengthTurn += getScreenW() / 640f; //3px(1080p) 比例
+                    popLengthCalibration += getScreenW() / 480f; //4px(1080p) 比例
+                    popLengthInfo += getScreenW() / 384f; //5px(1080p) 比例
 
                     if (degree <= 0) {
                         isSettingOpen = false;
@@ -394,11 +396,11 @@ public class SettingView {
                 @Override
                 public void run() {
                     degree += 1;
-                    popLengthSave -= App.screenW / 1920; //1px(1080p) 比例
-                    popLengthRecorder -= App.screenW / 960f; //2px(1080p) 比例
-                    popLengthTurn -= App.screenW / 640f; //3px(1080p) 比例
-                    popLengthCalibration -= App.screenW / 480f; //4px(1080p) 比例
-                    popLengthInfo -= App.screenW / 384f; //5px(1080p) 比例
+                    popLengthSave -= getScreenW() / 1920; //1px(1080p) 比例
+                    popLengthRecorder -= getScreenW() / 960f; //2px(1080p) 比例
+                    popLengthTurn -= getScreenW() / 640f; //3px(1080p) 比例
+                    popLengthCalibration -= getScreenW() / 480f; //4px(1080p) 比例
+                    popLengthInfo -= getScreenW() / 384f; //5px(1080p) 比例
                     if (degree >= 180) {
                         timer.cancel();
                     }

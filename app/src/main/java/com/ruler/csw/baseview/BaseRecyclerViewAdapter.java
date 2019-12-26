@@ -1,4 +1,4 @@
-package com.ruler.csw.base;
+package com.ruler.csw.baseview;
 
 import android.content.Context;
 import androidx.databinding.DataBindingUtil;
