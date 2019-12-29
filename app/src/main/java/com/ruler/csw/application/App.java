@@ -5,7 +5,7 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 
 import com.ruler.csw.constant.StringConst;
-import com.ruler.csw.global.SizeInfo;
+import com.ruler.csw.global.RulerInfo;
 import com.ruler.csw.util.DimensionUtil;
 import com.ruler.csw.util.MySP;
 
@@ -34,7 +34,7 @@ public class App extends Application {
         float screenWidth = dm.widthPixels;
         float screenHeight = dm.heightPixels;
         String curUnit = (String) MySP.getInst(this)
-                .getData(StringConst.SP_KEY_UNIT, StringConst.SP_UNIT_DEFAULT);
+                .getData(StringConst.SP_KEY_UNIT, StringConst.SP_DEFAULT_UNIT);
         float size1mm = (float) MySP.getInst(this).getData(StringConst.SP_KEY_SIZE1MM,
                 DimensionUtil.convertToPixel(this, TypedValue.COMPLEX_UNIT_MM, 1));
         float size1_32inch = (float) MySP.getInst(this).getData(StringConst.SP_KEY_1_32INCH,
@@ -43,7 +43,7 @@ public class App extends Application {
         float sizeRationMM = size1mm / size1px;
         float sizeRationINCH = size1_32inch / size1px;
 
-        SizeInfo.getInst()
+        RulerInfo.getInst()
                 .setScreenWidth(screenWidth)
                 .setScreenHeight(screenHeight)
                 .setCurUnit(curUnit)

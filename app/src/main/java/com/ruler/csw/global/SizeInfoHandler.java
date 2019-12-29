@@ -6,68 +6,68 @@ package com.ruler.csw.global;
 public interface SizeInfoHandler {
 
     default float getScreenW() {
-        return SizeInfo.getInst().getScreenWidth();
+        return RulerInfo.getInst().getScreenWidth();
     }
 
     default float getScreenH() {
-        return SizeInfo.getInst().getScreenHeight();
+        return RulerInfo.getInst().getScreenHeight();
     }
 
     default float getSize1mm() {
-        return SizeInfo.getInst().getSize1mm();
+        return RulerInfo.getInst().getSize1mm();
     }
 
     default float getSize1_32inch() {
-        return SizeInfo.getInst().getSize1_32inch();
+        return RulerInfo.getInst().getSize1_32inch();
     }
 
     default float getSize1px() {
-        return SizeInfo.getInst().getSize1px();
+        return RulerInfo.getInst().getSize1px();
     }
 
     default float getSizeRationMM() {
-        return SizeInfo.getInst().getSizeRationMM();
+        return RulerInfo.getInst().getSizeRationMM();
     }
 
     default float getSizeRationINCH() {
-        return SizeInfo.getInst().getSizeRationINCH();
+        return RulerInfo.getInst().getSizeRationINCH();
     }
 
     default String getCurUnit() {
-        return SizeInfo.getInst().getCurUnit();
+        return RulerInfo.getInst().getCurUnit();
     }
 
 
-    default SizeInfo setScreenW(float screenW) {
-        return SizeInfo.getInst().setScreenWidth(screenW);
+    default RulerInfo setScreenW(float screenW) {
+        return RulerInfo.getInst().setScreenWidth(screenW);
     }
 
-    default SizeInfo setScreenH(float screenH) {
-        return SizeInfo.getInst().setScreenHeight(screenH);
+    default RulerInfo setScreenH(float screenH) {
+        return RulerInfo.getInst().setScreenHeight(screenH);
     }
 
-    default SizeInfo setSize1mm(float size1mm) {
-        return SizeInfo.getInst().setSize1mm(size1mm);
+    default RulerInfo setSize1mm(float size1mm) {
+        return RulerInfo.getInst().setSize1mm(size1mm);
     }
 
-    default SizeInfo setSize1_32inch(float size1_32inch) {
-        return SizeInfo.getInst().setSize1_32inch(size1_32inch);
+    default RulerInfo setSize1_32inch(float size1_32inch) {
+        return RulerInfo.getInst().setSize1_32inch(size1_32inch);
     }
 
-    default SizeInfo setSize1px(float size1px) {
-        return SizeInfo.getInst().setSize1px(size1px);
+    default RulerInfo setSize1px(float size1px) {
+        return RulerInfo.getInst().setSize1px(size1px);
     }
 
-    default SizeInfo setSizeRationMM(float sizeRationMM) {
-        return SizeInfo.getInst().setSizeRationMM(sizeRationMM);
+    default RulerInfo setSizeRationMM(float sizeRationMM) {
+        return RulerInfo.getInst().setSizeRationMM(sizeRationMM);
     }
 
-    default SizeInfo setSizeRationINCH(float sizeRationINCH) {
-        return SizeInfo.getInst().setSizeRationINCH(sizeRationINCH);
+    default RulerInfo setSizeRationINCH(float sizeRationINCH) {
+        return RulerInfo.getInst().setSizeRationINCH(sizeRationINCH);
     }
 
-    default SizeInfo setCurUnit(String curUnit) {
-        return SizeInfo.getInst().setCurUnit(curUnit);
+    default RulerInfo setCurUnit(String curUnit) {
+        return RulerInfo.getInst().setCurUnit(curUnit);
     }
 
 }

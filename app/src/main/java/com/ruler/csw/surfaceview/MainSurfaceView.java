@@ -52,7 +52,7 @@ public class MainSurfaceView extends BaseSurfaceView implements SizeInfoHandler 
         canvas.drawColor(BgColor);
         // 画刻度
         scaleView.draw(canvas, paint);
-        // 话游标
+        // 画游标
         cursorView.draw(canvas, paint);
         // 画距离文本
         lengthTextView.draw(canvas, paint);

@@ -3,11 +3,11 @@ package com.ruler.csw.global;
 /**
  * Created by 丛 on 2019/12/23 0023.
  */
-public class SizeInfo {
+public class RulerInfo {
 
-    private static SizeInfo instance = new SizeInfo();
+    private static RulerInfo instance = new RulerInfo();
 
-    public static SizeInfo getInst() {
+    public static RulerInfo getInst() {
         return instance;
     }
 
@@ -55,42 +55,42 @@ public class SizeInfo {
     }
 
 
-    public SizeInfo setScreenWidth(float screenWidth) {
+    public RulerInfo setScreenWidth(float screenWidth) {
         this.screenWidth = screenWidth;
         return this;
     }
 
-    public SizeInfo setScreenHeight(float screenHeight) {
+    public RulerInfo setScreenHeight(float screenHeight) {
         this.screenHeight = screenHeight;
         return this;
     }
 
-    public SizeInfo setSize1mm(float size1mm) {
+    public RulerInfo setSize1mm(float size1mm) {
         this.size1mm = size1mm;
         return this;
     }
 
-    public SizeInfo setSize1_32inch(float size1_32inch) {
+    public RulerInfo setSize1_32inch(float size1_32inch) {
         this.size1_32inch = size1_32inch;
         return this;
     }
 
-    public SizeInfo setSize1px(float size1px) {
+    public RulerInfo setSize1px(float size1px) {
         this.size1px = size1px;
         return this;
     }
 
-    public SizeInfo setSizeRationMM(float sizeRationMM) {
+    public RulerInfo setSizeRationMM(float sizeRationMM) {
         this.sizeRationMM = sizeRationMM;
         return this;
     }
 
-    public SizeInfo setSizeRationINCH(float sizeRationINCH) {
+    public RulerInfo setSizeRationINCH(float sizeRationINCH) {
         this.sizeRationINCH = sizeRationINCH;
         return this;
     }
 
-    public SizeInfo setCurUnit(String curUnit) {
+    public RulerInfo setCurUnit(String curUnit) {
         this.curUnit = curUnit;
         return this;
     }

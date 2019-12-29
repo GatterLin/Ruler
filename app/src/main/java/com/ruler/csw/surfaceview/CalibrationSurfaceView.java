@@ -21,7 +21,6 @@ import com.ruler.csw.R;
 import com.ruler.csw.activity.CalibrationActivity;
 import com.ruler.csw.baseview.BaseActivity;
 import com.ruler.csw.baseview.BaseSurfaceView;
-import com.ruler.csw.global.SizeInfo;
 import com.ruler.csw.global.SizeInfoHandler;
 import com.ruler.csw.util.MySP;
 

@@ -8,7 +8,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.os.Bundle;
 import android.view.MotionEvent;
 import android.widget.Toast;
 
@@ -19,7 +18,6 @@ import com.ruler.csw.activity.MainActivity;
 import com.ruler.csw.activity.RecordActivity;
 import com.ruler.csw.application.App;
 import com.ruler.csw.bean.Item;
-import com.ruler.csw.global.SizeInfo;
 import com.ruler.csw.global.SizeInfoHandler;
 import com.ruler.csw.util.MySP;
 import com.ruler.csw.util.RecordUtil;
