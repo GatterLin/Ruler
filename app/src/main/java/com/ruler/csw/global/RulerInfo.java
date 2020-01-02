@@ -22,6 +22,8 @@ public class RulerInfo {
 
     private String curUnit;
 
+    private String rulerDirection;
+
     public float getScreenWidth() {
         return screenWidth;
     }
@@ -54,6 +56,9 @@ public class RulerInfo {
         return curUnit;
     }
 
+    public String getRulerDirection() {
+        return rulerDirection;
+    }
 
     public RulerInfo setScreenWidth(float screenWidth) {
         this.screenWidth = screenWidth;
@@ -92,6 +97,11 @@ public class RulerInfo {
 
     public RulerInfo setCurUnit(String curUnit) {
         this.curUnit = curUnit;
+        return this;
+    }
+
+    public RulerInfo setRulerDirection(String rulerDirection) {
+        this.rulerDirection = rulerDirection;
         return this;
     }
 }

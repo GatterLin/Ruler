@@ -3,7 +3,7 @@ package com.ruler.csw.global;
 /**
  * Created by 丛 on 2019/12/23 0023.
  */
-public interface SizeInfoHandler {
+public interface RulerInfoHandler {
 
     default float getScreenW() {
         return RulerInfo.getInst().getScreenWidth();
@@ -37,6 +37,10 @@ public interface SizeInfoHandler {
         return RulerInfo.getInst().getCurUnit();
     }
 
+    default String getRulerDirection() {
+        return RulerInfo.getInst().getRulerDirection();
+    }
+
 
     default RulerInfo setScreenW(float screenW) {
         return RulerInfo.getInst().setScreenWidth(screenW);
@@ -68,6 +72,10 @@ public interface SizeInfoHandler {
 
     default RulerInfo setCurUnit(String curUnit) {
         return RulerInfo.getInst().setCurUnit(curUnit);
+    }
+
+    default RulerInfo setRulerDirection(String rulerDirection) {
+        return RulerInfo.getInst().setRulerDirection(rulerDirection);
     }
 
 }

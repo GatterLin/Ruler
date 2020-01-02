@@ -34,7 +34,7 @@ public class App extends Application {
         float screenWidth = dm.widthPixels;
         float screenHeight = dm.heightPixels;
         String curUnit = (String) MySP.getInst(this)
-                .getData(StringConst.SP_KEY_UNIT, StringConst.SP_DEFAULT_UNIT);
+                .getData(StringConst.SP_KEY_UNIT, StringConst.RULER_UNIT_CM);
         float size1mm = (float) MySP.getInst(this).getData(StringConst.SP_KEY_SIZE1MM,
                 DimensionUtil.convertToPixel(this, TypedValue.COMPLEX_UNIT_MM, 1));
         float size1_32inch = (float) MySP.getInst(this).getData(StringConst.SP_KEY_1_32INCH,
@@ -42,6 +42,8 @@ public class App extends Application {
         float size1px = DimensionUtil.convertToPixel(this, TypedValue.COMPLEX_UNIT_PX, 1);
         float sizeRationMM = size1mm / size1px;
         float sizeRationINCH = size1_32inch / size1px;
+        String rulerDirection = (String) MySP.getInst(this).getData(StringConst.SP_KEY_RULER_DIRECTION,
+                StringConst.RULER_DIRECTION_RIGHT);
 
         RulerInfo.getInst()
                 .setScreenWidth(screenWidth)
@@ -51,7 +53,8 @@ public class App extends Application {
                 .setSize1_32inch(size1_32inch)
                 .setSize1px(size1px)
                 .setSizeRationMM(sizeRationMM)
-                .setSizeRationINCH(sizeRationINCH);
+                .setSizeRationINCH(sizeRationINCH)
+                .setRulerDirection(rulerDirection);
     }
 
 }

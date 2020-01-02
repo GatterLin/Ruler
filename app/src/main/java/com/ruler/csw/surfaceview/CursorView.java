@@ -6,7 +6,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.MotionEvent;
 
-import com.ruler.csw.global.SizeInfoHandler;
+import com.ruler.csw.constant.StringConst;
+import com.ruler.csw.global.RulerInfoHandler;
 import com.ruler.csw.myinterface.DrawViewInterface;
 
 import java.util.Timer;
@@ -16,7 +17,7 @@ import java.util.TimerTask;
 /**
  * Created by 丛 on 2018/6/13 0013.
  */
-public class CursorView implements DrawViewInterface, SizeInfoHandler {
+public class CursorView implements DrawViewInterface, RulerInfoHandler {
     // 游标线坐标
     private float lineStartX; // 改值即为测量距离
     private float lineStartY;
@@ -207,25 +208,34 @@ public class CursorView implements DrawViewInterface, SizeInfoHandler {
     }
 
     private float getFormatScale(float measureLength) {
+        if (StringConst.RULER_DIRECTION_LEFT.equals(getRulerDirection())) {
+            measureLength = getScreenW() - measureLength;
+        }
         float ration = getSizeRationMM();
-        if ("cm".equals(getCurUnit())) {
+        if (StringConst.RULER_UNIT_CM.equals(getCurUnit())) {
             ration = getSizeRationMM();
-        } else if ("inch".equals(getCurUnit())) {
+        } else if (StringConst.RULER_UNIT_INCH.equals(getCurUnit())) {
             ration = getSizeRationINCH();
         }
         float length = measureLength / ration; // 单位数字变为毫米
         length = Math.round(length); // 毫米四舍五入
         length *= ration; // 单位变为像素
+        if (StringConst.RULER_DIRECTION_LEFT.equals(getRulerDirection())) {
+            length = getScreenW() - length;
+        }
         return length;
     }
 
     public String getLengthString() {
         float length = getFormatScale(lineStartX);
-        if ("cm".equals(getCurUnit())) {
+        if (StringConst.RULER_DIRECTION_LEFT.equals(getRulerDirection())) {
+            length = getScreenW() - length;
+        }
+        if (StringConst.RULER_UNIT_CM.equals(getCurUnit())) {
             length /= getSizeRationMM(); // 变为毫米
             length = Math.round(length); // 四舍五入
-            return (length / 10f) + "cm"; // 变为厘米
-        } else if ("inch".equals(getCurUnit())) {
+            return (length / 10f) + StringConst.RULER_UNIT_CM; // 变为厘米
+        } else if (StringConst.RULER_UNIT_INCH.equals(getCurUnit())) {
             int inch1_32Num = Math.round(length / getSize1_32inch());
             int leftNum = inch1_32Num / 32;
             int rightNum = inch1_32Num % 32;

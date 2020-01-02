@@ -17,4 +17,14 @@ public class MainActivity extends BaseActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
     }
 
+    @Override
+    protected boolean onBackBtnClick() {
+        boolean b = binding.surfaceViewMain.settingView.isSettingOpen();
+        if (b) {
+            binding.surfaceViewMain.settingView.openOrCloseSetting(true);
+            return true;
+        }
+        return false;
+    }
+
 }

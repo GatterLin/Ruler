@@ -21,7 +21,7 @@ import com.ruler.csw.R;
 import com.ruler.csw.activity.CalibrationActivity;
 import com.ruler.csw.baseview.BaseActivity;
 import com.ruler.csw.baseview.BaseSurfaceView;
-import com.ruler.csw.global.SizeInfoHandler;
+import com.ruler.csw.global.RulerInfoHandler;
 import com.ruler.csw.util.MySP;
 
 import java.util.Timer;
@@ -31,7 +31,7 @@ import java.util.TimerTask;
  * Created by 丛 on 2018/6/16 0016.
  */
 public class CalibrationSurfaceView extends BaseSurfaceView<CalibrationActivity>
-        implements CalibrationActivity.NPChangedListener, SizeInfoHandler {
+        implements CalibrationActivity.NPChangedListener, RulerInfoHandler {
     public int measureMode;
 
     private String[] calibrationName = new String[]{

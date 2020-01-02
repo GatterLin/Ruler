@@ -4,12 +4,12 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
-import com.ruler.csw.global.SizeInfoHandler;
+import com.ruler.csw.global.RulerInfoHandler;
 
 /**
  * Created by 丛 on 2018/6/14 0014.
  */
-public class LengthTextView implements SizeInfoHandler {
+public class LengthTextView implements RulerInfoHandler {
     private float textX;
     private float textY; // 字体的左下角坐标值
     private String lengthText;

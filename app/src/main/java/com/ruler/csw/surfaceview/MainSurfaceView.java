@@ -11,12 +11,12 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 
 import com.ruler.csw.baseview.BaseSurfaceView;
-import com.ruler.csw.global.SizeInfoHandler;
+import com.ruler.csw.global.RulerInfoHandler;
 
 /**
  * Created by 丛 on 2018/6/13 0013.
  */
-public class MainSurfaceView extends BaseSurfaceView implements SizeInfoHandler {
+public class MainSurfaceView extends BaseSurfaceView implements RulerInfoHandler {
     private final int BgColor = Color.parseColor("#EDEDED");
 
     // 绘制类

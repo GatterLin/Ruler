@@ -33,4 +33,16 @@ public abstract class BaseActivity extends AppCompatActivity {
         finish();
     }
 
+    @Override
+    public void onBackPressed() {
+        if (onBackBtnClick()) {
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    protected boolean onBackBtnClick() {
+        return false;
+    }
+
 }
