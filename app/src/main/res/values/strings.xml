@@ -57,4 +57,14 @@
 
     <string name="toast_length_copy_clipboard">The length has been copied to the clipboard</string>
 
+    <string name="about_ruler_app">About Ruler</string>
+
+    <string name="check_the_update">Check the update</string>
+
+    <string name="rate_app">Rate or suggest for Ruler</string>
+
+    <string name="contact_developer">Contact the developer</string>
+
+    <string name="github_open_source">Github open source address</string>
+
 </resources>

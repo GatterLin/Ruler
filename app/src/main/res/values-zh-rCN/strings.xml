@@ -57,4 +57,14 @@
 
     <string name="toast_length_copy_clipboard">测量长度已复制到剪切板</string>
 
+    <string name="about_ruler_app">关于尺子</string>
+
+    <string name="check_the_update">检查更新</string>
+
+    <string name="rate_app">评价或建议尺子</string>
+
+    <string name="contact_developer">联系开发者</string>
+
+    <string name="github_open_source">Github程序开源地址</string>
+
 </resources>
