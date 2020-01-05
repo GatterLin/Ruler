@@ -11,6 +11,8 @@ import com.ruler.csw.util.MySP;
 
 // todo 反转尺子
 // todo 设置项图标下添加中文描述
+// todo 点击测量文本可以复制到剪切板
+// todo 开源项目，修改关于页面
 
 /**
  * Created by 丛 on 2018/6/13 0013.

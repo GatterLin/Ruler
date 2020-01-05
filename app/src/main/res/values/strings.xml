@@ -55,4 +55,6 @@
 
     <string name="toast_reverse_ruler">Reverse the ruler</string>
 
+    <string name="toast_length_copy_clipboard">The length has been copied to the clipboard</string>
+
 </resources>

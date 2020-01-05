@@ -408,7 +408,7 @@ public class SettingView implements RulerInfoHandler {
                 }, 0, 10);
                 return true;
             }
-            // endRegion
+            // endregion
             //region 点击屏幕其他区域,关闭弹出的设置
             if (isSettingOpen) {
                 openOrCloseSetting(isSettingOpen);
@@ -491,7 +491,7 @@ public class SettingView implements RulerInfoHandler {
         // 设置画笔粗细
         paint.setStrokeWidth(getScreenW() / 1080f);  // 1px(1080p) 比例
         // 设置阴影效果
-        paint.setShadowLayer(getScreenW() / 960, getScreenW() / 1920,
+        paint.setShadowLayer(getScreenW() / 1080, getScreenW() / 1920,
                 getScreenW() / 1920, Color.GRAY);
     }
 

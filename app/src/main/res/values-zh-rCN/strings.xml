@@ -55,4 +55,6 @@
 
     <string name="toast_reverse_ruler">翻转尺子</string>
 
+    <string name="toast_length_copy_clipboard">测量长度已复制到剪切板</string>
+
 </resources>

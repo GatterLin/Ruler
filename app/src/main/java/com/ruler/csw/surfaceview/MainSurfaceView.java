@@ -42,7 +42,7 @@ public class MainSurfaceView extends BaseSurfaceView implements RulerInfoHandler
         } else if ("inch".equals(getCurUnit())) {
             cursorView = new CursorView((Activity) getContext(), getSize1_32inch() * 32f, getScreenH() / 2f);
         }
-        lengthTextView = new LengthTextView();
+        lengthTextView = new LengthTextView(this);
         settingView = new SettingView(this);
     }
 
@@ -71,9 +71,11 @@ public class MainSurfaceView extends BaseSurfaceView implements RulerInfoHandler
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (settingView.touch(event))
+        if (settingView.touch(event)) {
             return true;
+        }
         cursorView.touch(event);
+        lengthTextView.touch(event);
         return true;
     }
 
