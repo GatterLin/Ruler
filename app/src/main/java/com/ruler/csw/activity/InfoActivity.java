@@ -1,28 +1,21 @@
 package com.ruler.csw.activity;
 
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.didikee.donate.AlipayDonate;
-import android.didikee.donate.WeiXinDonate;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.View;
 import android.widget.Toast;
 
 import com.ruler.csw.R;
 import com.ruler.csw.BR;
-import com.ruler.csw.base.BaseActivity;
-import com.ruler.csw.base.BaseRecyclerViewAdapter;
+import com.ruler.csw.baseview.BaseActivity;
+import com.ruler.csw.baseview.BaseRecyclerViewAdapter;
 import com.ruler.csw.bean.InfoBean;
 import com.ruler.csw.databinding.ActivityInfoBinding;
+import com.ruler.csw.util.ResUtil;
 
-import java.io.File;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +29,7 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public class InfoActivity extends BaseActivity {
     private ActivityInfoBinding binding;
+    private final String email = "congsw@foxmail.com";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,6 +38,10 @@ public class InfoActivity extends BaseActivity {
         binding.setInfoActivity(this);
         binding.tbInfo.setContentInsetsAbsolute(0, 0); // 去掉toolbar内部边距
         initRv();
+    }
+
+    public static void intentFor(Activity activity) {
+        activity.startActivity(new Intent(activity, InfoActivity.class));
     }
 
     private void initRv() {
@@ -62,7 +60,15 @@ public class InfoActivity extends BaseActivity {
                     launchAppDetail();
                     break;
                 case 2:
-
+                    Intent intentEmail = new Intent(Intent.ACTION_SEND);
+                    intentEmail.setType("message/rfc822");
+                    intentEmail.putExtra(Intent.EXTRA_EMAIL, new String[]{ email });
+                    startActivity(intentEmail);
+                    break;
+                case 3:
+                    Uri uri = Uri.parse("https://github.com/congshengwu/Ruler");
+                    Intent intentGithub = new Intent(Intent.ACTION_VIEW, uri);
+                    startActivity(intentGithub);
                     break;
             }
         });
@@ -73,7 +79,7 @@ public class InfoActivity extends BaseActivity {
 
         InfoBean bean1 = new InfoBean();
         bean1.setIconResId(R.drawable.update);
-        bean1.setTitle("检查更新");
+        bean1.setTitle(ResUtil.getString(this, R.string.check_the_update));
         String verName = "";
         try {
             verName = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
@@ -85,64 +91,29 @@ public class InfoActivity extends BaseActivity {
 
         InfoBean bean2 = new InfoBean();
         bean2.setIconResId(R.drawable.comment);
-        bean2.setTitle("评价应用");
+        bean2.setTitle(ResUtil.getString(this, R.string.rate_app));
         bean2.setText("");
 
         InfoBean bean3 = new InfoBean();
         bean3.setIconResId(R.drawable.e_mail);
-        bean3.setTitle("联系开发者");
-        bean3.setText("congsw@foxmail.com");
+        bean3.setTitle(ResUtil.getString(this, R.string.contact_developer));
+        bean3.setText(email);
+
+        InfoBean bean4 = new InfoBean();
+        bean4.setIconResId(R.drawable.github);
+        bean4.setTitle(ResUtil.getString(this, R.string.github_open_source));
 
         beanList.add(bean1);
         beanList.add(bean2);
         beanList.add(bean3);
+        beanList.add(bean4);
         return beanList;
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        deleteWxImg();
     }
 
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.cv1) {
-            donateAlipay("fkx066318qeujes3spyjy6c");
-        } else if (id == R.id.cv2) {
-            getRedPacket();
-        } else if (id == R.id.cv3) {
-            donateWeixin();
-        } else if (id == R.id.iv_back) {
+        if (id == R.id.iv_back) {
             finish();
-        }
-    }
-
-    private void donateAlipay(String payCode) {
-        boolean hasInstalledAlipayClient = AlipayDonate.hasInstalledAlipayClient(this);
-        if (hasInstalledAlipayClient) {
-            AlipayDonate.startAlipayClient(this, payCode);
-        }
-    }
-
-    private void donateWeixin() {
-        InputStream weixinQrIs = getResources().openRawResource(R.raw.wx_donate);
-        String qrPath = Environment.getExternalStorageDirectory().getAbsolutePath()
-                + File.separator + "Pictures" + File.separator +
-                "尺子" + File.separator + "wx_donate.jpg";
-        WeiXinDonate.saveDonateQrImage2SDCard(qrPath, BitmapFactory.decodeStream(weixinQrIs));
-        WeiXinDonate.donateViaWeiXin(this, qrPath);
-        Toast.makeText(this, "从相册选取二维码进行打赏", Toast.LENGTH_LONG).show();
-    }
-
-    private void deleteWxImg() {
-        String path = Environment.getExternalStorageDirectory().getAbsolutePath()
-                + File.separator + "Pictures" + File.separator +
-                "尺子" + File.separator + "wx_donate.jpg";
-        File file = new File(path);
-        if (file.exists()) {
-            file.delete();
-            sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + path)));
         }
     }
 
@@ -154,22 +125,6 @@ public class InfoActivity extends BaseActivity {
             startActivity(intent);
         }catch(Exception e){
             Toast.makeText(InfoActivity.this, "您的手机没有安装安卓应用市场", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
-    }
-
-    private void getRedPacket() {
-        try {
-            ClipboardManager manager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-            if (manager != null) {
-                manager.setPrimaryClip(ClipData.newPlainText("RedPacket", "526608712"));
-            }
-            Uri uri = Uri.parse("alipayqr://platformapi/startapp");
-            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            Toast.makeText(this, "已复制526608712", Toast.LENGTH_LONG).show();
-        } catch (Exception e) {
             e.printStackTrace();
         }
     }

@@ -1,4 +1,4 @@
-package com.ruler.csw.base;
+package com.ruler.csw.baseview;
 
 import android.view.View;
 
@@ -31,6 +31,18 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected void customToolBarBackFunc() {
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (onBackBtnClick()) {
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    protected boolean onBackBtnClick() {
+        return false;
     }
 
 }

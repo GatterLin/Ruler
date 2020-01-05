@@ -10,13 +10,13 @@ import androidx.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
-import com.ruler.csw.application.App;
-import com.ruler.csw.base.BaseSurfaceView;
+import com.ruler.csw.baseview.BaseSurfaceView;
+import com.ruler.csw.global.RulerInfoHandler;
 
 /**
  * Created by 丛 on 2018/6/13 0013.
  */
-public class MainSurfaceView extends BaseSurfaceView {
+public class MainSurfaceView extends BaseSurfaceView implements RulerInfoHandler {
     private final int BgColor = Color.parseColor("#EDEDED");
 
     // 绘制类
@@ -37,12 +37,12 @@ public class MainSurfaceView extends BaseSurfaceView {
 
     private void init() {
         scaleView = new ScaleView();
-        if (App.unit.equals("cm")) {
-            cursorView = new CursorView((Activity) getContext(), App.size1mm * 60f, App.screenH / 2f);
-        } else if (App.unit.equals("inch")) {
-            cursorView = new CursorView((Activity) getContext(), App.size1_32inch * 32f, App.screenH / 2f);
+        if ("cm".equals(getCurUnit())) {
+            cursorView = new CursorView((Activity) getContext(), getSize1mm() * 60f, getScreenH() / 2f);
+        } else if ("inch".equals(getCurUnit())) {
+            cursorView = new CursorView((Activity) getContext(), getSize1_32inch() * 32f, getScreenH() / 2f);
         }
-        lengthTextView = new LengthTextView();
+        lengthTextView = new LengthTextView(this);
         settingView = new SettingView(this);
     }
 
@@ -52,7 +52,7 @@ public class MainSurfaceView extends BaseSurfaceView {
         canvas.drawColor(BgColor);
         // 画刻度
         scaleView.draw(canvas, paint);
-        // 话游标
+        // 画游标
         cursorView.draw(canvas, paint);
         // 画距离文本
         lengthTextView.draw(canvas, paint);
@@ -71,9 +71,11 @@ public class MainSurfaceView extends BaseSurfaceView {
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (settingView.touch(event))
+        if (settingView.touch(event)) {
             return true;
+        }
         cursorView.touch(event);
+        lengthTextView.touch(event);
         return true;
     }
 

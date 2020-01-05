@@ -18,7 +18,7 @@ public class MySP {
         editor = mySharedPreference.edit();
     }
 
-    public static synchronized MySP getInstance(Context context) {
+    public static synchronized MySP getInst(Context context) {
         if(instance == null){
             instance = new MySP(context);
         }

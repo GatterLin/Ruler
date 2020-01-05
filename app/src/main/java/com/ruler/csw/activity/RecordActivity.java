@@ -1,6 +1,8 @@
 package com.ruler.csw.activity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -21,7 +23,7 @@ import android.widget.EditText;
 import com.ruler.csw.R;
 import com.ruler.csw.adapter.RecordAdapter;
 import com.ruler.csw.application.App;
-import com.ruler.csw.base.BaseActivity;
+import com.ruler.csw.baseview.BaseActivity;
 import com.ruler.csw.bean.Item;
 import com.ruler.csw.databinding.ActivityRecordBinding;
 import com.ruler.csw.util.RecordUtil;
@@ -100,6 +102,13 @@ public class RecordActivity extends BaseActivity implements RecordAdapter.CardVi
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         changeCount();
+    }
+
+    public static void intentFor(Activity activity) {
+        Intent intent = new Intent(activity, RecordActivity.class);
+        Bundle bundle = new Bundle();
+        intent.putExtra("bundle", bundle);
+        activity.startActivityForResult(intent, App.Request_Code_Start_Activity);
     }
 
     private void changeCount() {
