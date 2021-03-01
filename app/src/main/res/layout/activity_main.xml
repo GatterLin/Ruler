@@ -7,19 +7,14 @@
             name="MainActivity"
             type="com.ruler.csw.activity.MainActivity"/>
     </data>
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <FrameLayout
+        android:layout_height="match_parent">
+        <com.ruler.csw.surfaceview.MainSurfaceView
+            android:id="@+id/surfaceView_main"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <com.ruler.csw.surfaceview.MainSurfaceView
-                android:id="@+id/surfaceView_main"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clickable="true"
-                android:focusable="true" />
-        </FrameLayout>
-    </LinearLayout>
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true" />
+    </FrameLayout>
 </layout>

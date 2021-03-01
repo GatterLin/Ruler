@@ -28,8 +28,11 @@ public class App extends Application {
 
     private void initSizeInfo() {
         DisplayMetrics dm = getResources().getDisplayMetrics();
-        float screenWidth = dm.widthPixels;
-        float screenHeight = dm.heightPixels;
+        // The ruler app is landscape to display. When try to get screen width and height,
+        // the app maybe not finish the screen rotation, so the max value will be as screen width
+        // and the min value will be as the screen height.
+        float screenWidth = Math.max(dm.widthPixels, dm.heightPixels);
+        float screenHeight = Math.min(dm.heightPixels, dm.widthPixels);
         String curUnit = (String) MySP.getInst(this)
                 .getData(StringConst.SP_KEY_UNIT, StringConst.RULER_UNIT_CM);
         float size1mm = (float) MySP.getInst(this).getData(StringConst.SP_KEY_SIZE1MM,
